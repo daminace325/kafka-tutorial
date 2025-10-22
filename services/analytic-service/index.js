@@ -1,4 +1,3 @@
-// 34:11
 import { Kafka } from "kafkajs"
 
 const kafka = new Kafka({
@@ -20,7 +19,7 @@ const run = async () => {
             eachMessage: async ({ topic, partition, message }) => {
                 const value = message.value.toString();
                 const { userId, cart } = JSON.parse(value);
-                const total = cart.reduce((acc, item) => acc + item.price, 0);
+                const total = cart.reduce((acc, item) => acc + item.price, 0).toFixed(2);
 
                 console.log(`Analytic consumer: User ${userId} paid ${total}`);
                 
